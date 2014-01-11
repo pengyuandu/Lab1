@@ -8,6 +8,7 @@
 /* FIXME: You may need to add #include directives, macro definitions,
    static function definitions, etc.  */
 #include <stdlib.h>
+#include <stdio.h>
 
 struct Node
 {
@@ -64,7 +65,17 @@ make_command_stream (int (*get_next_byte) (void *),
      You can also use external functions defined in the GNU C Library.  */
   struct Node * stack;
   stack = NULL;
-  
+  int input;
+  char c; 
+
+  input = get_next_byte (get_next_byte_argument);
+  while ( input != EOF )
+  {
+      c = (char)input;
+      printf("%c", c);
+      input = get_next_byte (get_next_byte_argument);
+  }  
+ 
   error (1, 0, "command reading not yet implemented");
   return 0;
 }
