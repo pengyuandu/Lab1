@@ -9,6 +9,7 @@
    static function definitions, etc.  */
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 struct Node
 {
@@ -67,12 +68,57 @@ make_command_stream (int (*get_next_byte) (void *),
   stack = NULL;
   int input;
   char c; 
+  char tmp[120] = "\0";
+  char comb[2];
 
   input = get_next_byte (get_next_byte_argument);
   while ( input != EOF )
   {
       c = (char)input;
       printf("%c", c);
+      switch (c)
+      {
+      case '(': 
+         printf("%s\n", tmp); 
+         strcpy(tmp,"\0");
+         break;
+      case '>': 
+         printf("%s\n", tmp); 
+         strcpy(tmp,"\0");
+         break;
+      case '<': 
+         printf("%s\n", tmp); 
+         strcpy(tmp,"\0");
+         break;
+      case '|': 
+         printf("%s\n", tmp); 
+         strcpy(tmp,"\0");
+         break;
+      case '&': 
+         printf("%s\n", tmp); 
+         strcpy(tmp,"\0");
+         break;
+      case ';': 
+         printf("%s\n", tmp); 
+         strcpy(tmp,"\0");
+         break;
+      case '\n': 
+         printf("%s\n", tmp);
+         strcpy(tmp,"\0");
+         break;
+      case '#':
+         printf("%s\n", tmp);
+         strcpy(tmp,"\0");
+         while (input != '\n')
+         {
+         input = get_next_byte (get_next_byte_argument);
+         }
+         break;
+      default: 
+         comb[0] = c;
+         comb[1] = '\0';
+         strcat(tmp, comb);
+      }
       input = get_next_byte (get_next_byte_argument);
   }  
  
